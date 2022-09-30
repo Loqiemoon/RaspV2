@@ -29,6 +29,27 @@ namespace RaspV2
         {
             return sql1;
         }
+
+        public ArrayList GetSchedule(string weekType, string day)
+        {
+            ArrayList list = new ArrayList();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = String.Format($"SELECT * FROM РасписаниеВ WHERE Неделя = '{weekType}' AND День = '{day}'", con);
+                SqlCommand com = new SqlCommand(query, con);
+
+                try
+                {
+                    con.Open();
+                    SqlDataReader dr = com.ExecuteReader();
+                    if (dr.HasRows)
+                        foreach (DbDataRecord result in dr)
+                            list.Add(result);
+                }
+                catch { }
+                return list;
+            }
+        }
         public ArrayList GetV()
         {
             ArrayList ocnV = new ArrayList();

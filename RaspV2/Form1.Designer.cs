@@ -45,6 +45,7 @@ namespace RaspV2
             this.dgv_rasp = new System.Windows.Forms.DataGridView();
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_upd = new System.Windows.Forms.Button();
+            this.cbx_day = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ocn)).BeginInit();
@@ -130,6 +131,7 @@ namespace RaspV2
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.cbx_day);
             this.groupBox1.Controls.Add(this.cbx_nedeli);
             this.groupBox1.Controls.Add(this.btn_addc);
             this.groupBox1.Controls.Add(this.btn_addr);
@@ -214,6 +216,7 @@ namespace RaspV2
             this.btn_del.TabIndex = 3;
             this.btn_del.Text = "Удалить";
             this.btn_del.UseVisualStyleBackColor = true;
+            this.btn_del.Click += new System.EventHandler(this.btn_del_Click);
             // 
             // btn_upd
             // 
@@ -225,6 +228,15 @@ namespace RaspV2
             this.btn_upd.Text = "Обновить";
             this.btn_upd.UseVisualStyleBackColor = true;
             this.btn_upd.Click += new System.EventHandler(this.btn_upd_Click);
+            // 
+            // cbx_day
+            // 
+            this.cbx_day.FormattingEnabled = true;
+            this.cbx_day.Location = new System.Drawing.Point(242, 21);
+            this.cbx_day.Name = "cbx_day";
+            this.cbx_day.Size = new System.Drawing.Size(207, 24);
+            this.cbx_day.TabIndex = 10;
+            this.cbx_day.SelectedIndexChanged += new System.EventHandler(this.cbx_day_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -263,6 +275,7 @@ namespace RaspV2
         private System.Windows.Forms.Button btn_addc;
         private System.Windows.Forms.Button btn_addr;
         private System.Windows.Forms.ComboBox cbx_nedeli;
+        private System.Windows.Forms.ComboBox cbx_day;
     }
 }
 
