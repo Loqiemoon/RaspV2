@@ -38,6 +38,7 @@ namespace RaspV2
             this.txbx_Naz = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbx_day = new System.Windows.Forms.ComboBox();
             this.cbx_nedeli = new System.Windows.Forms.ComboBox();
             this.btn_addc = new System.Windows.Forms.Button();
             this.btn_addr = new System.Windows.Forms.Button();
@@ -45,7 +46,6 @@ namespace RaspV2
             this.dgv_rasp = new System.Windows.Forms.DataGridView();
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_upd = new System.Windows.Forms.Button();
-            this.cbx_day = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ocn)).BeginInit();
@@ -83,7 +83,7 @@ namespace RaspV2
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(87, 121);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 17);
+            this.label3.Size = new System.Drawing.Size(62, 16);
             this.label3.TabIndex = 5;
             this.label3.Text = "Кабинет";
             // 
@@ -92,7 +92,7 @@ namespace RaspV2
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(40, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 17);
+            this.label2.Size = new System.Drawing.Size(111, 16);
             this.label2.TabIndex = 4;
             this.label2.Text = "Преподаватель";
             // 
@@ -122,7 +122,7 @@ namespace RaspV2
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 17);
+            this.label1.Size = new System.Drawing.Size(140, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Название предмета";
             // 
@@ -146,6 +146,15 @@ namespace RaspV2
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Расписание";
             // 
+            // cbx_day
+            // 
+            this.cbx_day.FormattingEnabled = true;
+            this.cbx_day.Location = new System.Drawing.Point(242, 21);
+            this.cbx_day.Name = "cbx_day";
+            this.cbx_day.Size = new System.Drawing.Size(207, 24);
+            this.cbx_day.TabIndex = 10;
+            this.cbx_day.SelectedIndexChanged += new System.EventHandler(this.cbx_SelectedIndexChanged);
+            // 
             // cbx_nedeli
             // 
             this.cbx_nedeli.FormattingEnabled = true;
@@ -153,6 +162,7 @@ namespace RaspV2
             this.cbx_nedeli.Name = "cbx_nedeli";
             this.cbx_nedeli.Size = new System.Drawing.Size(207, 24);
             this.cbx_nedeli.TabIndex = 9;
+            this.cbx_nedeli.SelectedIndexChanged += new System.EventHandler(this.cbx_SelectedIndexChanged);
             // 
             // btn_addc
             // 
@@ -228,15 +238,6 @@ namespace RaspV2
             this.btn_upd.Text = "Обновить";
             this.btn_upd.UseVisualStyleBackColor = true;
             this.btn_upd.Click += new System.EventHandler(this.btn_upd_Click);
-            // 
-            // cbx_day
-            // 
-            this.cbx_day.FormattingEnabled = true;
-            this.cbx_day.Location = new System.Drawing.Point(242, 21);
-            this.cbx_day.Name = "cbx_day";
-            this.cbx_day.Size = new System.Drawing.Size(207, 24);
-            this.cbx_day.TabIndex = 10;
-            this.cbx_day.SelectedIndexChanged += new System.EventHandler(this.cbx_day_SelectedIndexChanged);
             // 
             // Form1
             // 

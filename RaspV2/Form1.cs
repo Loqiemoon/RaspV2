@@ -42,7 +42,23 @@ namespace RaspV2
             }
 
         }
-        void cbx_nedeli_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string weekType = cbx_nedeli.SelectedItem.ToString();
+            string day = cbx_day.SelectedItem.ToString();
+
+
+            MessageBox.Show(weekType);
+            MessageBox.Show(day);
+
+
+            ArrayList list = dal.GetSchedule(weekType, day);
+            dgv_ocn.DataSource = list;
+            Form1_upd();
+        }
+
+        /*
+        private void cbx_nedeli_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             //string selectedState = cbx_nedeli.SelectedItem.ToString();
             //MessageBox.Show(selectedState);
@@ -61,6 +77,7 @@ namespace RaspV2
             //    dgv_ocn.DataSource = ocnN;
             //    Vnos();
             //}
+
             string weekType = cbx_nedeli.SelectedItem.ToString();
             string day = cbx_day.SelectedItem.ToString();
 
@@ -88,13 +105,13 @@ namespace RaspV2
             dgv_ocn.DataSource = list;
             Form1_upd();
         }
-
+        */
         private void Form1_Load(object sender, EventArgs e)
         {
 
             //Vnos();
             //MessageBox.Show(dgv_ocn[1, 0].Value.ToString());
-            cbx_nedeli.SelectedIndexChanged += cbx_nedeli_SelectedIndexChanged;
+            //cbx_nedeli.SelectedIndexChanged += cbx_nedeli_SelectedIndexChanged;
             //Form1_upd();
             
             while (sch < 1)
@@ -286,7 +303,5 @@ namespace RaspV2
             int c1 = Int32.Parse(c);
             dgv_rasp[c1, r1].Value = null;
         }
-
-        
     }
 }
