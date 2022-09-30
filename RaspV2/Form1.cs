@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Collections;
 using System.Data.Common;
 using System.Data.SqlClient;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RaspV2
 {
@@ -76,6 +77,17 @@ namespace RaspV2
 
         void test()
         {
+            //dgv_rasp.Rows.Clear();
+
+            try
+            {
+                dgv_rasp[0, 1].Value = dgv_ocn[2, 0];
+                dgv_rasp[1, 0].Value = dgv_ocn[3, 0];
+                dgv_rasp[1, 1].Value = dgv_ocn[4, 0];
+            } catch { return; }
+
+
+            /*
             for (int i = 0; i < dgv_ocn.RowCount; i++)
             {
                 string text = " ";
@@ -99,6 +111,7 @@ namespace RaspV2
                 }
                 catch { }
             }
+            */
         }
         private void cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -112,7 +125,7 @@ namespace RaspV2
             ArrayList list = dal.GetSchedule(weekType, day);
             dgv_ocn.DataSource = list;
 
-            //test();
+            test();
 
 
             //dgv_rasp.DataSource = list;
