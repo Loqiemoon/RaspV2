@@ -29,7 +29,7 @@ namespace RaspV2
         {
             return sql1;
         }
-
+        /*
         public ArrayList GetSchedule(string weekType, string day)
         {
             ArrayList list = new ArrayList();
@@ -50,6 +50,7 @@ namespace RaspV2
                 return list;
             }
         }
+        */
         public ArrayList GetV()
         {
             ArrayList ocnV = new ArrayList();

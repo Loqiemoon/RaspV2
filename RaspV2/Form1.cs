@@ -22,7 +22,6 @@ namespace RaspV2
         string day;
         int sch;
         
-
         public Form1()
         {
             InitializeComponent();
@@ -40,80 +39,56 @@ namespace RaspV2
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+        }
 
+        public ArrayList GetSchedule(string weekType, string day)
+        {
+            ArrayList list = new ArrayList();
+
+            /*
+            for (int i = 0; i < dgv_ocn.RowCount; i++)
+            {
+                string text = " ";
+                try
+                {
+                    int row = Int32.Parse(dgv_ocn[8, i].Value.ToString());
+                    int column = Int32.Parse(dgv_ocn[9, i].Value.ToString());
+                    if (row != 0 || column != 0)
+                    {
+                        for (int j = 0; j < dgv_ocn.ColumnCount; j++)
+                        {
+                            if (j > 3 && j < 8)
+                            {
+                                text += dgv_ocn[j, i].Value.ToString();
+                                text += " ";
+                            }
+
+                        }
+                        dgv_rasp[column, row].Value = text;
+                    }
+                }
+                catch { }
+            }
+            */
+
+            return list;
         }
         private void cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cbx_nedeli.SelectedItem == null || cbx_day.SelectedItem == null) { return; }
             string weekType = cbx_nedeli.SelectedItem.ToString();
             string day = cbx_day.SelectedItem.ToString();
-
-
             MessageBox.Show(weekType);
             MessageBox.Show(day);
 
 
-            ArrayList list = dal.GetSchedule(weekType, day);
-            dgv_ocn.DataSource = list;
-            Form1_upd();
+            ArrayList list = GetSchedule(weekType, day);
+            dgv_rasp.DataSource = list;
+            //Form1_upd();
         }
 
-        /*
-        private void cbx_nedeli_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            //string selectedState = cbx_nedeli.SelectedItem.ToString();
-            //MessageBox.Show(selectedState);
-            //ned = selectedState;
-            //if (selectedState == "Верхняя неделя")
-            //{
-            //    dgv_rasp.Rows.Clear();
-            //    ArrayList ocnV = dal.GetV();
-            //    dgv_ocn.DataSource = ocnV;
-            //    Vnos();
-            //}
-            //else
-            //{
-            //    dgv_rasp.Rows.Clear();
-            //    ArrayList ocnN = dal.GetN();
-            //    dgv_ocn.DataSource = ocnN;
-            //    Vnos();
-            //}
-
-            string weekType = cbx_nedeli.SelectedItem.ToString();
-            string day = cbx_day.SelectedItem.ToString();
-
-
-            MessageBox.Show(weekType);
-            MessageBox.Show(day);
-
-
-            ArrayList list = dal.GetSchedule(weekType, day);
-            dgv_ocn.DataSource = list;
-            Form1_upd();
-        }
-
-        private void cbx_day_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string weekType = cbx_nedeli.SelectedItem.ToString();
-            string day = cbx_day.SelectedItem.ToString();
-
-
-            MessageBox.Show(weekType);
-            MessageBox.Show(day);
-
-
-            ArrayList list = dal.GetSchedule(weekType, day);
-            dgv_ocn.DataSource = list;
-            Form1_upd();
-        }
-        */
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            //Vnos();
-            //MessageBox.Show(dgv_ocn[1, 0].Value.ToString());
-            //cbx_nedeli.SelectedIndexChanged += cbx_nedeli_SelectedIndexChanged;
-            //Form1_upd();
-            
             while (sch < 1)
             {
                 int maxR = 0;
@@ -131,7 +106,7 @@ namespace RaspV2
                 for (int i = 0; i < maxR + 1; i++)
                     dgv_rasp.Rows.Add();
                 //dgv_rasp.Rows.Add();
-                Form1_upd();
+                //Form1_upd();
                 sch = +1;
             }
             
@@ -158,9 +133,10 @@ namespace RaspV2
                 dgv_rasp.Rows.Add();
 
 
-            Form1_upd();
+            //Form1_upd();
         }
 
+        /*
         void Form1_upd()
         {
             //ArrayList ocnV = dal.GetV();
@@ -168,8 +144,8 @@ namespace RaspV2
             string weekType = cbx_nedeli.SelectedItem.ToString();
             string day = cbx_day.SelectedItem.ToString();
 
-            ArrayList list = dal.GetSchedule(weekType, day);
-            dgv_ocn.DataSource = list;
+            //ArrayList list = dal.GetSchedule(weekType, day);
+            //dgv_ocn.DataSource = list;
             for (int i = 0; i < dgv_ocn.RowCount; i++)
             {
                 string text = " ";
@@ -194,6 +170,7 @@ namespace RaspV2
                 catch { }
             }
         }
+        */
 
         private void dgv_rasp_Click(object sender, EventArgs e)
         {
@@ -204,7 +181,6 @@ namespace RaspV2
             {
                 r = dgv_rasp.CurrentCell.RowIndex.ToString();
                 c = dgv_rasp.CurrentCell.ColumnIndex.ToString();
-                
             }
             else
             {
@@ -225,11 +201,11 @@ namespace RaspV2
                     }
                 }
             }
-            
         }
 
         private void btn_SaveC_Click(object sender, EventArgs e)
         {
+            
             dal.openConnection();
             //if (dgv_rasp.Rows.Count == 0)
             //{
@@ -272,8 +248,8 @@ namespace RaspV2
                 }
             }
             dal.closedConnection();
-            Form1_upd();
-
+            //Form1_upd();
+            
         }
 
         private void btn_addr_Click(object sender, EventArgs e)
@@ -293,15 +269,17 @@ namespace RaspV2
 
         private void btn_del_Click(object sender, EventArgs e)
         {
+            
             dal.openConnection();
             string into = $"DELETE FROM РасписаниеВ WHERE [Строка] = '{r}' and [Столбец] = '{c}'";
             SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
             int number = commandupd.ExecuteNonQuery();
             dal.closedConnection();
-            Form1_upd();
+            //Form1_upd();
             int r1 = Int32.Parse(r);
             int c1 = Int32.Parse(c);
             dgv_rasp[c1, r1].Value = null;
+            
         }
     }
 }
