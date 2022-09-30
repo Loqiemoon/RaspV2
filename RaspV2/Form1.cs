@@ -26,9 +26,9 @@ namespace RaspV2
         {
             InitializeComponent();
             
-            ArrayList ocnV = dal.GetV();
-            ArrayList ocnN = dal.GetN();
-            dgv_ocn.DataSource = ocnV;
+            //ArrayList ocnV = dal.GetV();
+            //ArrayList ocnN = dal.GetN();
+            //dgv_ocn.DataSource = ocnV;
             cbx_nedeli.Items.AddRange(new object[] { "Верхняя неделя", "Нижняя неделя" });
             cbx_day.Items.AddRange(new object[] { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" });
             cbx_nedeli.SelectedItem = "Верхняя неделя";
@@ -73,6 +73,33 @@ namespace RaspV2
 
             return list;
         }
+
+        void test()
+        {
+            for (int i = 0; i < dgv_ocn.RowCount; i++)
+            {
+                string text = " ";
+                try
+                {
+                    int row = Int32.Parse(dgv_ocn[8, i].Value.ToString());
+                    int column = Int32.Parse(dgv_ocn[9, i].Value.ToString());
+                    if (row != 0 || column != 0)
+                    {
+                        for (int j = 0; j < dgv_ocn.ColumnCount; j++)
+                        {
+                            if (j > 3 && j < 8)
+                            {
+                                text += dgv_ocn[j, i].Value.ToString();
+                                text += " ";
+                            }
+
+                        }
+                        dgv_rasp[column, row].Value = text;
+                    }
+                }
+                catch { }
+            }
+        }
         private void cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbx_nedeli.SelectedItem == null || cbx_day.SelectedItem == null) { return; }
@@ -82,8 +109,13 @@ namespace RaspV2
             MessageBox.Show(day);
 
 
-            ArrayList list = GetSchedule(weekType, day);
-            dgv_rasp.DataSource = list;
+            ArrayList list = dal.GetSchedule(weekType, day);
+            dgv_ocn.DataSource = list;
+
+            //test();
+
+
+            //dgv_rasp.DataSource = list;
             //Form1_upd();
         }
 
