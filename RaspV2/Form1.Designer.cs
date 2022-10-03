@@ -46,10 +46,12 @@ namespace RaspV2
             this.dgv_rasp = new System.Windows.Forms.DataGridView();
             this.btn_del = new System.Windows.Forms.Button();
             this.btn_upd = new System.Windows.Forms.Button();
+            this.dgv_gr = new System.Windows.Forms.DataGridView();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ocn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_rasp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_gr)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -83,7 +85,7 @@ namespace RaspV2
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(87, 121);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(62, 16);
+            this.label3.Size = new System.Drawing.Size(64, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Кабинет";
             // 
@@ -92,7 +94,7 @@ namespace RaspV2
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(40, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 16);
+            this.label2.Size = new System.Drawing.Size(111, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Преподаватель";
             // 
@@ -122,7 +124,7 @@ namespace RaspV2
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 34);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 16);
+            this.label1.Size = new System.Drawing.Size(140, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Название предмета";
             // 
@@ -131,6 +133,7 @@ namespace RaspV2
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.dgv_gr);
             this.groupBox1.Controls.Add(this.cbx_day);
             this.groupBox1.Controls.Add(this.cbx_nedeli);
             this.groupBox1.Controls.Add(this.btn_addc);
@@ -190,12 +193,14 @@ namespace RaspV2
             // 
             this.dgv_ocn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_ocn.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_ocn.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_ocn.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ocn.Location = new System.Drawing.Point(15, 514);
             this.dgv_ocn.Name = "dgv_ocn";
             this.dgv_ocn.RowHeadersWidth = 51;
             this.dgv_ocn.RowTemplate.Height = 24;
-            this.dgv_ocn.Size = new System.Drawing.Size(1044, 129);
+            this.dgv_ocn.Size = new System.Drawing.Size(690, 129);
             this.dgv_ocn.TabIndex = 6;
             // 
             // dgv_rasp
@@ -239,6 +244,17 @@ namespace RaspV2
             this.btn_upd.UseVisualStyleBackColor = true;
             this.btn_upd.Click += new System.EventHandler(this.btn_upd_Click);
             // 
+            // dgv_gr
+            // 
+            this.dgv_gr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_gr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_gr.Location = new System.Drawing.Point(744, 514);
+            this.dgv_gr.Name = "dgv_gr";
+            this.dgv_gr.RowHeadersWidth = 51;
+            this.dgv_gr.RowTemplate.Height = 24;
+            this.dgv_gr.Size = new System.Drawing.Size(315, 129);
+            this.dgv_gr.TabIndex = 11;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -254,6 +270,7 @@ namespace RaspV2
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ocn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_rasp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_gr)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -277,6 +294,7 @@ namespace RaspV2
         private System.Windows.Forms.Button btn_addr;
         private System.Windows.Forms.ComboBox cbx_nedeli;
         private System.Windows.Forms.ComboBox cbx_day;
+        private System.Windows.Forms.DataGridView dgv_gr;
     }
 }
 

@@ -26,10 +26,12 @@ namespace RaspV2
         public Form1()
         {
             InitializeComponent();
-            
+
             //ArrayList ocnV = dal.GetV();
             //ArrayList ocnN = dal.GetN();
             //dgv_ocn.DataSource = ocnV;
+            ArrayList group = dal.Group();
+            dgv_gr.DataSource = group;
             cbx_nedeli.Items.AddRange(new object[] { "Верхняя неделя", "Нижняя неделя" });
             cbx_day.Items.AddRange(new object[] { "Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота" });
             cbx_nedeli.SelectedItem = "Верхняя неделя";
@@ -77,17 +79,14 @@ namespace RaspV2
 
         void test()
         {
-            //dgv_rasp.Rows.Clear();
-
+            crtble();
             try
             {
-                dgv_rasp[0, 1].Value = dgv_ocn[2, 0];
-                dgv_rasp[1, 0].Value = dgv_ocn[3, 0];
-                dgv_rasp[1, 1].Value = dgv_ocn[4, 0];
+                for (int i = 0; i < dgv_gr.RowCount; i++)
+                    dgv_rasp[i+1, 0].Value = dgv_gr[0, i].Value.ToString();
             } catch { return; }
 
-
-            /*
+            
             for (int i = 0; i < dgv_ocn.RowCount; i++)
             {
                 string text = " ";
@@ -111,7 +110,7 @@ namespace RaspV2
                 }
                 catch { }
             }
-            */
+            
         }
         private void cbx_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -134,27 +133,52 @@ namespace RaspV2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            while (sch < 1)
-            {
-                int maxR = 0;
-                int maxC = 0;
-                for (int i = 0; i < dgv_ocn.RowCount; i++)
-                {
-                    if (Int32.Parse(dgv_ocn[8, i].Value.ToString()) > maxR)
-                        maxR = Int32.Parse(dgv_ocn[8, i].Value.ToString());
-                    if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
-                        maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
-                }
-                for (int i = 0; i < maxC + 1; i++)
-                    dgv_rasp.Columns.Add("", "*");
-                //dgv_rasp.Columns.Add("", "*");
-                for (int i = 0; i < maxR + 1; i++)
-                    dgv_rasp.Rows.Add();
-                //dgv_rasp.Rows.Add();
-                //Form1_upd();
-                sch = +1;
-            }
+            //while (sch < 1)
+            //{
+            //    int maxR = 0;
+            //    int maxC = 0;
+            //    for (int i = 0; i < dgv_ocn.RowCount; i++)
+            //    {
+            //        if (Int32.Parse(dgv_ocn[8, i].Value.ToString()) > maxR)
+            //            maxR = Int32.Parse(dgv_ocn[8, i].Value.ToString());
+            //        if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
+            //            maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
+            //    }
+            //    for (int i = 0; i < 3; i++)
+            //        dgv_rasp.Columns.Add("", "*");
+            //    //dgv_rasp.Columns.Add("", "*");
+            //    for (int i = 0; i < 7; i++)
+            //        dgv_rasp.Rows.Add();
+            //    //dgv_rasp.Rows.Add();
+            //    //Form1_upd();
+            //    sch = +1;
+            //}
             
+        }
+
+        void crtble()
+        {
+            dgv_rasp.Rows.Clear();
+            dgv_rasp.Columns.Clear();
+            int maxR = 0;
+            int maxC = 0;
+            for (int i = 0; i < dgv_ocn.RowCount; i++)
+            {
+                if (Int32.Parse(dgv_ocn[8, i].Value.ToString()) > maxR)
+                    maxR = Int32.Parse(dgv_ocn[8, i].Value.ToString());
+                if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
+                    maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
+            }
+            for (int i = 0; i < 5; i++)
+                dgv_rasp.Columns.Add("", "*");
+            //dgv_rasp.Columns.Add("", "*");
+            dgv_rasp.Rows.Add("");
+            dgv_rasp.Rows.Add("08:00-09:30");
+            dgv_rasp.Rows.Add("09:40-11:10");
+            dgv_rasp.Rows.Add("12:05-13:35");
+            dgv_rasp.Rows.Add("13:45-15:15");
+            dgv_rasp.Rows.Add("15:25-16:55");
+            dgv_rasp.Rows.Add("17:05-18:35");
         }
 
         void Vnos()
@@ -176,9 +200,6 @@ namespace RaspV2
 
             for (int i = 0; i < maxR + 1; i++)
                 dgv_rasp.Rows.Add();
-
-
-            //Form1_upd();
         }
 
         /*
@@ -256,44 +277,32 @@ namespace RaspV2
             //{
             //    MessageBox.Show("rrr");
             //}
+            string weekType = cbx_nedeli.SelectedItem.ToString();
+            string day = cbx_day.SelectedItem.ToString();
             if (dgv_rasp.CurrentCell.Value == null)
             {
                 r = dgv_rasp.CurrentCell.RowIndex.ToString();
                 c = dgv_rasp.CurrentCell.ColumnIndex.ToString();
-                if (ned == "Верхняя неделя")
-                {
-                    string into = $"INSERT INTO РасписаниеВ ([Неделя], [Предмет], [Преподаватель], [Кабинет], [Строка], [Столбец]) "+ 
-                    $" VALUES ('{ned}', '{txbx_Naz.Text}', '{txbx_prep.Text}', '{txbx_kab.Text}', '{r}', '{c}')";
-                    SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
-                    int number = commandupd.ExecuteNonQuery();
-                }
-                else
-                {
-                    string into = $"INSERT INTO РасписаниеВ ([Неделя], [Предмет], [Преподаватель], [Кабинет], [Строка], [Столбец]) " +
-                    $" VALUES ('{ned}', '{txbx_Naz.Text}', '{txbx_prep.Text}', '{txbx_kab.Text}', '{r}', '{c}')";
-                    SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
-                    int number = commandupd.ExecuteNonQuery();
-                }
+                int row = Int32.Parse(dgv_rasp.CurrentCell.RowIndex.ToString());
+                int column = Int32.Parse(dgv_rasp.CurrentCell.ColumnIndex.ToString());
+                string time = dgv_rasp[0, row].Value.ToString();
+                string g = dgv_rasp[column, 0].Value.ToString();
+                string into = $"INSERT INTO РасписаниеВ ([Неделя], [День], [Время], [Группа], [Предмет], [Преподаватель], [Кабинет], [Строка], [Столбец]) " +
+                $" VALUES ('{weekType}', '{day}', '{time}', '{g}', '{txbx_Naz.Text}', '{txbx_prep.Text}', '{txbx_kab.Text}', '{r}', '{c}')";
+                SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
+                int number = commandupd.ExecuteNonQuery();
             }
             else 
             {
-                if (ned == "Верхняя неделя")
-                {
-                    string upd = $"UPDATE РасписаниеВ SET[Предмет] = '{txbx_Naz.Text}', " +
-                    $"[Преподаватель] = '{txbx_prep.Text}', [Кабинет] = '{txbx_kab.Text}' WHERE [Строка] = '{r}' and [Столбец] = '{c}'";
-                    SqlCommand commandupd = new SqlCommand(upd, dal.getConnect());
-                    int number = commandupd.ExecuteNonQuery();
-                }
-                else
-                {
-                    string upd = $"UPDATE РасписаниеН SET[Предмет] = '{txbx_Naz.Text}', " +
-                    $"[Преподаватель] = '{txbx_prep.Text}', [Кабинет] = '{txbx_kab.Text}' WHERE [Строка] = '{r}' and [Столбец] = '{c}'";
-                    SqlCommand commandupd = new SqlCommand(upd, dal.getConnect());
-                    int number = commandupd.ExecuteNonQuery();
-                }
+                string upd = $"UPDATE РасписаниеВ SET[Предмет] = '{txbx_Naz.Text}', " +
+                $"[Преподаватель] = '{txbx_prep.Text}', [Кабинет] = '{txbx_kab.Text}' WHERE [Строка] = '{r}' and [Столбец] = '{c}'";
+                SqlCommand commandupd = new SqlCommand(upd, dal.getConnect());
+                int number = commandupd.ExecuteNonQuery();
             }
             dal.closedConnection();
-            //Form1_upd();
+            ArrayList list = dal.GetSchedule(weekType, day);
+            dgv_ocn.DataSource = list;
+            test();
             
         }
 

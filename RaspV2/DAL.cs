@@ -51,6 +51,27 @@ namespace RaspV2
             }
         }
 
+        public ArrayList Group()
+        {
+            ArrayList list = new ArrayList();
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                string query = String.Format($"SELECT DISTINCT Группа, Столбец FROM РасписаниеВ", con);
+                SqlCommand com = new SqlCommand(query, con);
+
+                try
+                {
+                    con.Open();
+                    SqlDataReader dr = com.ExecuteReader();
+                    if (dr.HasRows)
+                        foreach (DbDataRecord result in dr)
+                            list.Add(result);
+                }
+                catch { }
+                return list;
+            }
+        }
+
         public ArrayList GetV()
         {
             ArrayList ocnV = new ArrayList();
