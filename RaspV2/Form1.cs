@@ -27,9 +27,6 @@ namespace RaspV2
         {
             InitializeComponent();
 
-            //ArrayList ocnV = dal.GetV();
-            //ArrayList ocnN = dal.GetN();
-            //dgv_ocn.DataSource = ocnV;
             ArrayList group = dal.Group();
             dgv_gr.DataSource = group;
             cbx_nedeli.Items.AddRange(new object[] { "Верхняя неделя", "Нижняя неделя" });
@@ -42,6 +39,7 @@ namespace RaspV2
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
+            duble();
         }
 
         public ArrayList GetSchedule(string weekType, string day)
@@ -77,16 +75,19 @@ namespace RaspV2
             return list;
         }
 
-        void test()
+        void zag()
         {
-            crtble();
             try
             {
                 for (int i = 0; i < dgv_gr.RowCount; i++)
-                    dgv_rasp[i+1, 0].Value = dgv_gr[0, i].Value.ToString();
-            } catch { return; }
-
-            
+                    dgv_rasp[i + 1, 0].Value = dgv_gr[0, i].Value.ToString();
+            }
+            catch { return; }
+        }
+        void test()
+        {
+            crtble();
+            zag();
             for (int i = 0; i < dgv_ocn.RowCount; i++)
             {
                 string text = " ";
@@ -120,40 +121,34 @@ namespace RaspV2
             MessageBox.Show(weekType);
             MessageBox.Show(day);
 
-
             ArrayList list = dal.GetSchedule(weekType, day);
             dgv_ocn.DataSource = list;
 
             test();
-
-
-            //dgv_rasp.DataSource = list;
-            //Form1_upd();
+            duble();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //while (sch < 1)
-            //{
-            //    int maxR = 0;
-            //    int maxC = 0;
-            //    for (int i = 0; i < dgv_ocn.RowCount; i++)
-            //    {
-            //        if (Int32.Parse(dgv_ocn[8, i].Value.ToString()) > maxR)
-            //            maxR = Int32.Parse(dgv_ocn[8, i].Value.ToString());
-            //        if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
-            //            maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
-            //    }
-            //    for (int i = 0; i < 3; i++)
-            //        dgv_rasp.Columns.Add("", "*");
-            //    //dgv_rasp.Columns.Add("", "*");
-            //    for (int i = 0; i < 7; i++)
-            //        dgv_rasp.Rows.Add();
-            //    //dgv_rasp.Rows.Add();
-            //    //Form1_upd();
-            //    sch = +1;
-            //}
-            
+            duble();
+        }
+
+        void duble()
+        {
+            for (int i = 0; i < dgv_ocn.RowCount - 1; i++)
+                for (int j = i + 1; j < dgv_ocn.RowCount; j++)
+                {
+                    if (dgv_ocn[5, i].Value.ToString() == dgv_ocn[5, j].Value.ToString() && dgv_ocn[8, i].Value.ToString() == dgv_ocn[8, j].Value.ToString())
+                    {
+                        int g = Int32.Parse(dgv_ocn[9, i].Value.ToString());
+                        int f = Int32.Parse(dgv_ocn[8, i].Value.ToString());
+                        dgv_rasp.Rows[f].Cells[g].Style.BackColor = Color.Yellow;
+                        int g1 = Int32.Parse(dgv_ocn[9, j].Value.ToString());
+                        int f1 = Int32.Parse(dgv_ocn[8, j].Value.ToString());
+                        dgv_rasp.Rows[f1].Cells[g1].Style.BackColor = Color.Yellow;
+                    }
+                        
+                }
         }
 
         void crtble()
@@ -169,9 +164,8 @@ namespace RaspV2
                 if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
                     maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < dgv_gr.RowCount + 1; i++)
                 dgv_rasp.Columns.Add("", "*");
-            //dgv_rasp.Columns.Add("", "*");
             dgv_rasp.Rows.Add("");
             dgv_rasp.Rows.Add("08:00-09:30");
             dgv_rasp.Rows.Add("09:40-11:10");
@@ -181,26 +175,26 @@ namespace RaspV2
             dgv_rasp.Rows.Add("17:05-18:35");
         }
 
-        void Vnos()
-        {
-            int maxR = 0;
-            int maxC = 0;
-            for (int i = 0; i < dgv_ocn.RowCount; i++)
-            {
-                if (Int32.Parse(dgv_ocn[8, i].Value.ToString()) > maxR)
-                    maxR = Int32.Parse(dgv_ocn[8, i].Value.ToString());
-                if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
-                    maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
-            }
-            if (dgv_rasp.ColumnCount != maxC + 1)
-            {
-                for (int i = 0; i < maxC + 1; i++)
-                    dgv_rasp.Columns.Add("", "*");
-            }
+        //void Vnos()
+        //{
+        //    int maxR = 0;
+        //    int maxC = 0;
+        //    for (int i = 0; i < dgv_ocn.RowCount; i++)
+        //    {
+        //        if (Int32.Parse(dgv_ocn[8, i].Value.ToString()) > maxR)
+        //            maxR = Int32.Parse(dgv_ocn[8, i].Value.ToString());
+        //        if (Int32.Parse(dgv_ocn[9, i].Value.ToString()) > maxC)
+        //            maxC = Int32.Parse(dgv_ocn[9, i].Value.ToString());
+        //    }
+        //    if (dgv_rasp.ColumnCount != maxC + 1)
+        //    {
+        //        for (int i = 0; i < maxC + 1; i++)
+        //            dgv_rasp.Columns.Add("", "*");
+        //    }
 
-            for (int i = 0; i < maxR + 1; i++)
-                dgv_rasp.Rows.Add();
-        }
+        //    for (int i = 0; i < maxR + 1; i++)
+        //        dgv_rasp.Rows.Add();
+        //}
 
         /*
         void Form1_upd()
@@ -243,6 +237,17 @@ namespace RaspV2
             txbx_Naz.Text = "";
             txbx_prep.Text = "";
             txbx_kab.Text = "";
+            int col = dgv_rasp.CurrentCell.ColumnIndex;
+            if (dgv_rasp[col, 0].Value != null)
+            {
+                txbx_gr.Text = "";
+                txbx_gr.ReadOnly = true;
+            }
+            else
+            {
+                txbx_gr.Text = "";
+                txbx_gr.ReadOnly = false;
+            }    
             if (dgv_rasp.CurrentCell.Value == null)
             {
                 r = dgv_rasp.CurrentCell.RowIndex.ToString();
@@ -271,54 +276,51 @@ namespace RaspV2
 
         private void btn_SaveC_Click(object sender, EventArgs e)
         {
-            
-            dal.openConnection();
-            //if (dgv_rasp.Rows.Count == 0)
-            //{
-            //    MessageBox.Show("rrr");
-            //}
+            //dal.openConnection();
             string weekType = cbx_nedeli.SelectedItem.ToString();
             string day = cbx_day.SelectedItem.ToString();
-            if (dgv_rasp.CurrentCell.Value == null)
+            int col = dgv_rasp.CurrentCell.ColumnIndex;
+            if (dgv_rasp[col, 0].Value != null || txbx_gr.Text != "")
             {
-                r = dgv_rasp.CurrentCell.RowIndex.ToString();
-                c = dgv_rasp.CurrentCell.ColumnIndex.ToString();
-                int row = Int32.Parse(dgv_rasp.CurrentCell.RowIndex.ToString());
-                int column = Int32.Parse(dgv_rasp.CurrentCell.ColumnIndex.ToString());
-                string time = dgv_rasp[0, row].Value.ToString();
-                string g = dgv_rasp[column, 0].Value.ToString();
-                string into = $"INSERT INTO РасписаниеВ ([Неделя], [День], [Время], [Группа], [Предмет], [Преподаватель], [Кабинет], [Строка], [Столбец]) " +
-                $" VALUES ('{weekType}', '{day}', '{time}', '{g}', '{txbx_Naz.Text}', '{txbx_prep.Text}', '{txbx_kab.Text}', '{r}', '{c}')";
-                SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
-                int number = commandupd.ExecuteNonQuery();
+                dal.openConnection();
+                if (dgv_rasp.CurrentCell.Value == null)
+                {
+                    r = dgv_rasp.CurrentCell.RowIndex.ToString();
+                    c = dgv_rasp.CurrentCell.ColumnIndex.ToString();
+                    int row = Int32.Parse(dgv_rasp.CurrentCell.RowIndex.ToString());
+                    int column = Int32.Parse(dgv_rasp.CurrentCell.ColumnIndex.ToString());
+                    dgv_rasp[column, 0].Value = txbx_gr.Text;
+                    string time = dgv_rasp[0, row].Value.ToString();
+                    string g = dgv_rasp[column, 0].Value.ToString();
+                    string into = $"INSERT INTO РасписаниеВ ([Неделя], [День], [Время], [Группа], [Предмет], [Преподаватель], [Кабинет], [Строка], [Столбец]) " +
+                    $" VALUES ('{weekType}', '{day}', '{time}', '{g}', '{txbx_Naz.Text}', '{txbx_prep.Text}', '{txbx_kab.Text}', '{r}', '{c}')";
+                    SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
+                    int number = commandupd.ExecuteNonQuery();
+                }
+                else
+                {
+                    string upd = $"UPDATE РасписаниеВ SET[Предмет] = '{txbx_Naz.Text}', " +
+                    $"[Преподаватель] = '{txbx_prep.Text}', [Кабинет] = '{txbx_kab.Text}' WHERE [Строка] = '{r}' and [Столбец] = '{c}'";
+                    SqlCommand commandupd = new SqlCommand(upd, dal.getConnect());
+                    int number = commandupd.ExecuteNonQuery();
+                }
+                dal.closedConnection();
+                ArrayList list = dal.GetSchedule(weekType, day);
+                dgv_ocn.DataSource = list;
+                ArrayList group = dal.Group();
+                dgv_gr.DataSource = group;
+                test();
+                duble();
             }
-            else 
+            else
             {
-                string upd = $"UPDATE РасписаниеВ SET[Предмет] = '{txbx_Naz.Text}', " +
-                $"[Преподаватель] = '{txbx_prep.Text}', [Кабинет] = '{txbx_kab.Text}' WHERE [Строка] = '{r}' and [Столбец] = '{c}'";
-                SqlCommand commandupd = new SqlCommand(upd, dal.getConnect());
-                int number = commandupd.ExecuteNonQuery();
+                MessageBox.Show("Введите номер группы", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            dal.closedConnection();
-            ArrayList list = dal.GetSchedule(weekType, day);
-            dgv_ocn.DataSource = list;
-            test();
-            
-        }
-
-        private void btn_addr_Click(object sender, EventArgs e)
-        {
-            dgv_rasp.Rows.Add();
         }
 
         private void btn_addc_Click(object sender, EventArgs e)
         {
             dgv_rasp.Columns.Add("", "*");
-        }
-
-        private void btn_upd_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void btn_del_Click(object sender, EventArgs e)
@@ -329,11 +331,18 @@ namespace RaspV2
             SqlCommand commandupd = new SqlCommand(into, dal.getConnect());
             int number = commandupd.ExecuteNonQuery();
             dal.closedConnection();
-            //Form1_upd();
+
             int r1 = Int32.Parse(r);
             int c1 = Int32.Parse(c);
             dgv_rasp[c1, r1].Value = null;
-            
+            ArrayList group = dal.Group();
+            dgv_gr.DataSource = group;
+            string weekType = cbx_nedeli.SelectedItem.ToString();
+            string day = cbx_day.SelectedItem.ToString();
+            ArrayList list = dal.GetSchedule(weekType, day);
+            dgv_ocn.DataSource = list;
+            test();
+            duble();
         }
     }
 }

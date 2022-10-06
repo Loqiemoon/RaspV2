@@ -72,72 +72,72 @@ namespace RaspV2
             }
         }
 
-        public ArrayList GetV()
-        {
-            ArrayList ocnV = new ArrayList();
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = String.Format("SELECT * FROM РасписаниеВ", con);
-                SqlCommand com = new SqlCommand(query, con);
-                try
-                {
-                    con.Open();
-                    SqlDataReader dr = com.ExecuteReader();
-                    if (dr.HasRows)
-                        foreach (DbDataRecord result in dr)
-                            ocnV.Add(result);
-                }
-                catch
-                {
+        //public ArrayList GetV()
+        //{
+        //    ArrayList ocnV = new ArrayList();
+        //    using (SqlConnection con = new SqlConnection(connectionString))
+        //    {
+        //        string query = String.Format("SELECT * FROM РасписаниеВ", con);
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        try
+        //        {
+        //            con.Open();
+        //            SqlDataReader dr = com.ExecuteReader();
+        //            if (dr.HasRows)
+        //                foreach (DbDataRecord result in dr)
+        //                    ocnV.Add(result);
+        //        }
+        //        catch
+        //        {
 
-                }
-            }
-            return ocnV;
-        }
+        //        }
+        //    }
+        //    return ocnV;
+        //}
 
-        public ArrayList GetN()
-        {
-            ArrayList ocnN = new ArrayList();
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = String.Format("SELECT * FROM РасписаниеН", con);
-                SqlCommand com = new SqlCommand(query, con);
-                try
-                {
-                    con.Open();
-                    SqlDataReader dr = com.ExecuteReader();
-                    if (dr.HasRows)
-                        foreach (DbDataRecord result in dr)
-                            ocnN.Add(result);
-                }
-                catch
-                {
+        //public ArrayList GetN()
+        //{
+        //    ArrayList ocnN = new ArrayList();
+        //    using (SqlConnection con = new SqlConnection(connectionString))
+        //    {
+        //        string query = String.Format("SELECT * FROM РасписаниеН", con);
+        //        SqlCommand com = new SqlCommand(query, con);
+        //        try
+        //        {
+        //            con.Open();
+        //            SqlDataReader dr = com.ExecuteReader();
+        //            if (dr.HasRows)
+        //                foreach (DbDataRecord result in dr)
+        //                    ocnN.Add(result);
+        //        }
+        //        catch
+        //        {
 
-                }
-            }
-            return ocnN;
-        }
+        //        }
+        //    }
+        //    return ocnN;
+        //}
 
-        public bool SaveC(string Предмет, string Преподаватель, string Кабинет)//сохранение
-        {
-            bool flagResult = false;
-            string query = string.Format("UPDATE Расписание([Предмет], [Преподаватель], [Кабинет] VALUES ('{0}', '{1}', '{2}')", Предмет, Преподаватель, Кабинет);
+//        public bool SaveC(string Предмет, string Преподаватель, string Кабинет)//сохранение
+//        {
+//            bool flagResult = false;
+//            string query = string.Format("UPDATE Расписание([Предмет], [Преподаватель], [Кабинет] VALUES ('{0}', '{1}', '{2}')", Предмет, Преподаватель, Кабинет);
 
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                SqlCommand com = new SqlCommand(query, con);
-                try
-                {
-                    con.Open();
-                    if (com.ExecuteNonQuery() == 1)
-                        flagResult = true;
-                }
-                catch
-                {
+//            using (SqlConnection con = new SqlConnection(connectionString))
+//            {
+//                SqlCommand com = new SqlCommand(query, con);
+//                try
+//                {
+//                    con.Open();
+//                    if (com.ExecuteNonQuery() == 1)
+//                        flagResult = true;
+//                }
+//                catch
+//                {
 
-                }
-            }
-            return flagResult;
-        }
+//                }
+//            }
+//            return flagResult;
+//        }
     }
 }

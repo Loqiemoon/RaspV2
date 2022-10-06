@@ -30,6 +30,8 @@ namespace RaspV2
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txbx_gr = new System.Windows.Forms.TextBox();
             this.btn_SaveC = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -38,24 +40,24 @@ namespace RaspV2
             this.txbx_Naz = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgv_gr = new System.Windows.Forms.DataGridView();
             this.cbx_day = new System.Windows.Forms.ComboBox();
             this.cbx_nedeli = new System.Windows.Forms.ComboBox();
-            this.btn_addc = new System.Windows.Forms.Button();
-            this.btn_addr = new System.Windows.Forms.Button();
             this.dgv_ocn = new System.Windows.Forms.DataGridView();
             this.dgv_rasp = new System.Windows.Forms.DataGridView();
             this.btn_del = new System.Windows.Forms.Button();
-            this.btn_upd = new System.Windows.Forms.Button();
-            this.dgv_gr = new System.Windows.Forms.DataGridView();
+            this.btn_addc = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_gr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ocn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_rasp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_gr)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.txbx_gr);
             this.groupBox2.Controls.Add(this.btn_SaveC);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
@@ -69,6 +71,22 @@ namespace RaspV2
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Редактирование";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(555, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(55, 17);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Группа";
+            // 
+            // txbx_gr
+            // 
+            this.txbx_gr.Location = new System.Drawing.Point(624, 118);
+            this.txbx_gr.Name = "txbx_gr";
+            this.txbx_gr.Size = new System.Drawing.Size(100, 22);
+            this.txbx_gr.TabIndex = 7;
             // 
             // btn_SaveC
             // 
@@ -102,7 +120,7 @@ namespace RaspV2
             // 
             this.txbx_kab.Location = new System.Drawing.Point(157, 118);
             this.txbx_kab.Name = "txbx_kab";
-            this.txbx_kab.Size = new System.Drawing.Size(567, 22);
+            this.txbx_kab.Size = new System.Drawing.Size(308, 22);
             this.txbx_kab.TabIndex = 3;
             // 
             // txbx_prep
@@ -137,17 +155,26 @@ namespace RaspV2
             this.groupBox1.Controls.Add(this.cbx_day);
             this.groupBox1.Controls.Add(this.cbx_nedeli);
             this.groupBox1.Controls.Add(this.btn_addc);
-            this.groupBox1.Controls.Add(this.btn_addr);
             this.groupBox1.Controls.Add(this.dgv_ocn);
             this.groupBox1.Controls.Add(this.dgv_rasp);
             this.groupBox1.Controls.Add(this.btn_del);
-            this.groupBox1.Controls.Add(this.btn_upd);
             this.groupBox1.Location = new System.Drawing.Point(12, 194);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(1078, 661);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Расписание";
+            // 
+            // dgv_gr
+            // 
+            this.dgv_gr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgv_gr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_gr.Location = new System.Drawing.Point(744, 514);
+            this.dgv_gr.Name = "dgv_gr";
+            this.dgv_gr.RowHeadersWidth = 51;
+            this.dgv_gr.RowTemplate.Height = 24;
+            this.dgv_gr.Size = new System.Drawing.Size(315, 129);
+            this.dgv_gr.TabIndex = 11;
             // 
             // cbx_day
             // 
@@ -166,28 +193,6 @@ namespace RaspV2
             this.cbx_nedeli.Size = new System.Drawing.Size(207, 24);
             this.cbx_nedeli.TabIndex = 9;
             this.cbx_nedeli.SelectedIndexChanged += new System.EventHandler(this.cbx_SelectedIndexChanged);
-            // 
-            // btn_addc
-            // 
-            this.btn_addc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_addc.Location = new System.Drawing.Point(683, 18);
-            this.btn_addc.Name = "btn_addc";
-            this.btn_addc.Size = new System.Drawing.Size(120, 46);
-            this.btn_addc.TabIndex = 8;
-            this.btn_addc.Text = "Добавить столбец";
-            this.btn_addc.UseVisualStyleBackColor = true;
-            this.btn_addc.Click += new System.EventHandler(this.btn_addc_Click);
-            // 
-            // btn_addr
-            // 
-            this.btn_addr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_addr.Location = new System.Drawing.Point(554, 17);
-            this.btn_addr.Name = "btn_addr";
-            this.btn_addr.Size = new System.Drawing.Size(120, 46);
-            this.btn_addr.TabIndex = 7;
-            this.btn_addr.Text = "Добавить строку";
-            this.btn_addr.UseVisualStyleBackColor = true;
-            this.btn_addr.Click += new System.EventHandler(this.btn_addr_Click);
             // 
             // dgv_ocn
             // 
@@ -233,27 +238,16 @@ namespace RaspV2
             this.btn_del.UseVisualStyleBackColor = true;
             this.btn_del.Click += new System.EventHandler(this.btn_del_Click);
             // 
-            // btn_upd
+            // btn_addc
             // 
-            this.btn_upd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_upd.Location = new System.Drawing.Point(810, 18);
-            this.btn_upd.Name = "btn_upd";
-            this.btn_upd.Size = new System.Drawing.Size(120, 46);
-            this.btn_upd.TabIndex = 2;
-            this.btn_upd.Text = "Обновить";
-            this.btn_upd.UseVisualStyleBackColor = true;
-            this.btn_upd.Click += new System.EventHandler(this.btn_upd_Click);
-            // 
-            // dgv_gr
-            // 
-            this.dgv_gr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgv_gr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_gr.Location = new System.Drawing.Point(744, 514);
-            this.dgv_gr.Name = "dgv_gr";
-            this.dgv_gr.RowHeadersWidth = 51;
-            this.dgv_gr.RowTemplate.Height = 24;
-            this.dgv_gr.Size = new System.Drawing.Size(315, 129);
-            this.dgv_gr.TabIndex = 11;
+            this.btn_addc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_addc.Location = new System.Drawing.Point(810, 21);
+            this.btn_addc.Name = "btn_addc";
+            this.btn_addc.Size = new System.Drawing.Size(120, 46);
+            this.btn_addc.TabIndex = 8;
+            this.btn_addc.Text = "Добавить столбец";
+            this.btn_addc.UseVisualStyleBackColor = true;
+            this.btn_addc.Click += new System.EventHandler(this.btn_addc_Click);
             // 
             // Form1
             // 
@@ -268,9 +262,9 @@ namespace RaspV2
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_gr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ocn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_rasp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_gr)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -289,12 +283,12 @@ namespace RaspV2
         private System.Windows.Forms.DataGridView dgv_ocn;
         private System.Windows.Forms.DataGridView dgv_rasp;
         private System.Windows.Forms.Button btn_del;
-        private System.Windows.Forms.Button btn_upd;
-        private System.Windows.Forms.Button btn_addc;
-        private System.Windows.Forms.Button btn_addr;
         private System.Windows.Forms.ComboBox cbx_nedeli;
         private System.Windows.Forms.ComboBox cbx_day;
         private System.Windows.Forms.DataGridView dgv_gr;
+        private System.Windows.Forms.TextBox txbx_gr;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn_addc;
     }
 }
 
